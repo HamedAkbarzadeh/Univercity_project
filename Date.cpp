@@ -1,14 +1,21 @@
-#include "DateOfBirth.h"
+#include "Date.h"
 
-DateOfBirth::DateOfBirth(string strDate) {
+
+//Constructor
+Date::Date() {
+	cout << endl << "**Date**" << endl;
+}
+Date::Date(string strDate) {
 	converStringToInt(strDate);
 }
-DateOfBirth::DateOfBirth(int year , int mounth , int day) {
+Date::Date(int year, int mounth, int day) {
 	setYear(year);
 	setMounth(mounth);
 	setDay(day);
 }
-void DateOfBirth::converStringToInt(string strDate) {
+//set
+
+void Date::converStringToInt(string strDate) {
 	int year = 0, mounth = 0, day = 0;
 
 	this->fullDate = strDate;
@@ -31,34 +38,34 @@ void DateOfBirth::converStringToInt(string strDate) {
 		}
 	}
 }
-void DateOfBirth::setYear(int year) {
+void Date::setYear(int year) {
 	if (year > 2023 || year < 1910) {
 		year = 2000;
 	}
 	this->year = year;
 }
-void DateOfBirth::setMounth(int mounth) {
+void Date::setMounth(int mounth) {
 	if (mounth > 12 || mounth < 0) {
 		mounth = 01;
 	}
 	this->mounth = mounth;
 }
-void DateOfBirth::setDay(int day) {
+void Date::setDay(int day) {
 	if (day > 31 || day < 0) {
 		day = 01;
 	}
 	this->day = day;
 }
-
-string DateOfBirth::getFullDate() {
+//get
+string Date::getFullDate() {
 	return fullDate;
 }
-int DateOfBirth::getYear() {
+int Date::getYear() {
 	return year;
 }
-int DateOfBirth::getMounth() {
+int Date::getMounth() {
 	return mounth;
 }
-int DateOfBirth::getDay() {
+int Date::getDay() {
 	return day;
 }

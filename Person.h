@@ -2,23 +2,28 @@
 #define Person_H
 #include <iostream>
 #include <string>
-#include "DateOfBirth.h"
+#include "Date.h"
 
 using namespace std;
 class Person
 {
 public:
-	Person(string fname , string lname , string username, string password, string moible);
+	Person(string fname , string lname , string username, string password, string mobile);
 	virtual void printPersonalInfo() = 0;
 	void setPassword(string password);
 	void setUsername(string username);
 	void setMobile(string mobile);
 	void setDatePerson(string strDate);
-private:
-	string username, password;
+
+	//get 
+	int getID() { return id; }
+	string getFname() { return fname; }
+	string getLname() { return lname; }
 protected:
-	string fname, lname, mobile;
-	DateOfBirth date;
+	static int idCounter;
+	int id;
+	string fname, lname, mobile , username, password;
+	Date date;
 
 };
 

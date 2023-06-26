@@ -1,7 +1,9 @@
 #include "Person.h"
-#include "DateOfBirth.h"
+#include "Date.h"
 
-Person::Person(string fname, string lname, string username, string password , string moible){
+int Person::idCounter = 0;
+Person::Person(string fname, string lname, string username, string password , string mobile){
+	this->id = idCounter++;
 	this->fname = fname;
 	this->lname = lname;
 	setPassword(password);

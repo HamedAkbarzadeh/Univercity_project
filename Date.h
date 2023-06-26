@@ -1,16 +1,18 @@
-#ifndef DateOfBirth_H
-#define DateOfBirth_H
+#ifndef Date_H
+#define Date_H
 #include <iostream>
 #include <string>
 using namespace std;
 
-class DateOfBirth
+class Date
 {
 	friend class Person;
+	friend class Student;
 public:
-	DateOfBirth(string);
-	DateOfBirth(int ,int ,int);
-	
+	Date();
+	Date(string);
+	Date(int, int, int);
+
 	void converStringToInt(string);
 	void setYear(int);
 	void setMounth(int);
@@ -27,4 +29,4 @@ private:
 };
 
 
-#endif // !DateOfBirth_H
+#endif // !Date_H
