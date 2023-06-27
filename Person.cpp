@@ -2,17 +2,18 @@
 #include "Date.h"
 
 int Person::idCounter = 0;
-Person::Person(string fname, string lname, string username, string password , string mobile){
+Person::Person(string fname, string lname, string username, string password , string mobile, string DateOfBirth){
 	this->id = idCounter++;
 	this->fname = fname;
 	this->lname = lname;
 	setPassword(password);
 	setUsername(username);
 	setMobile(mobile);
+	date.converStringToInt(DateOfBirth);
 }
 void Person::setPassword(string password) {
 	int passlen = size(password);
-	if (passlen < 7) {
+	if (passlen < 6) {
 		password = "123456";
 	}
 	this->password = password;

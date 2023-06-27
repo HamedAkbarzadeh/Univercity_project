@@ -9,8 +9,9 @@
 class Student :public Person
 {
 public:
-	Student(string fname, string lname, string username, string password, string moible , string yearsOfStart);
+	Student(string fname, string lname, string username, string password, string moible, string DateOfBirth, string yearsOfStart);
 	virtual void printPersonalInfo();
+	virtual void setType();
 	Student& operator = (Student c);
 private:
 	static int StudentNumbercounter;

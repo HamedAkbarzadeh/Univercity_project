@@ -12,16 +12,20 @@ Student& Student::operator=(Student c) {
 	this->password = c.password;
 	this->dateOfEnter = c.dateOfEnter;
 	this->date = c.date;
+	this->type = c.type;
 	return c;
 }
 
 int Student::StudentNumbercounter = 401133100;
-Student::Student(string fname, string lname, string username, string password, string moible,string yearsOfStart)
-	: Person(fname, lname, username, password, moible) {
+Student::Student(string fname, string lname, string username, string password, string moible, string DateOfBirth,string yearsOfStart)
+	: Person(fname, lname, username, password, moible, DateOfBirth) {
 	studentNumber = StudentNumbercounter++;
 
 	dateOfEnter.converStringToInt(yearsOfStart);
 }
 void Student::printPersonalInfo() {
 	cout << endl << "\tFirst Name : " << fname << endl << "\tLast Name : " << lname << endl << "\tmobile : " << mobile << endl << "\tStudent Number : " << studentNumber << endl << endl;
+}
+void Student::setType() {
+	this->type = 0;
 }
