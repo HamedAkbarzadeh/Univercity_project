@@ -24,7 +24,20 @@ Student::Student(string fname, string lname, string username, string password, s
 	dateOfEnter.converStringToInt(yearsOfStart);
 }
 void Student::printPersonalInfo() {
-	cout << endl << "\tFirst Name : " << fname << endl << "\tLast Name : " << lname << endl << "\tmobile : " << mobile << endl << "\tStudent Number : " << studentNumber << endl << endl;
+	int passLen = size(password);
+	cout << endl << "\tID : " << id
+		<< endl << "\tFirst Name : " << fname 
+		<< endl << "\tLast Name : " << lname
+		<< endl << "\tmobile : " << mobile
+		<< endl << "\tStudent Number : " << getStudentNumber()
+		<< endl << "\tDate Of Birth : " << date.getFullDate() 
+		<< endl << "\tDate Of Enter To Univercity : " << dateOfEnter.getFullDate()
+		<< endl << "\tEmail : " << username << endl << "\tpassword : ";
+	for (int i = 0; i <= passLen; i++)
+	{
+		cout << "*";
+	}
+	cout << endl << endl;
 }
 void Student::setType() {
 	this->type = 0;

@@ -8,7 +8,8 @@ using namespace std;
 class Person
 {
 public:
-	Person(string fname , string lname , string username, string password, string mobile, string DateOfBirth);
+	Person(string fname , string lname , string username, string password,
+		string mobile, string DateOfBirth);
 	virtual void printPersonalInfo() = 0;
 	virtual void setType() = 0;
 

@@ -39,10 +39,14 @@ void Admin::setType() {
 }
 void Admin::printPersonalInfo() {
 	int passLen = size(password);
-	cout << endl << "\tFirst Name : " << fname << endl << "\tLast Name : " << lname 
+	cout << endl << "\tID : " << id
+		<< endl << "\tFirst Name : " << fname 
+		<< endl << "\tLast Name : " << lname 
 		<< endl << "\tmobile : " << mobile 
-		<< endl << "\tDate Of Birth : " << date.getFullDate() << endl << "\trule : " << rule 
-		<< endl << "\tEmail : " << username << endl << "\tpassword : ";
+		<< endl << "\tDate Of Birth : " << date.getFullDate() 
+		<< endl << "\trule : " << rule 
+		<< endl << "\tEmail : " << username 
+		<< endl << "\tpassword : ";
 	for (int i = 0; i <= passLen; i++)
 	{
 		cout << "*";

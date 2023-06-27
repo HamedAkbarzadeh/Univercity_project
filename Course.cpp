@@ -4,7 +4,7 @@
 Course::Course() {
 	cout << endl << "**Course**" << endl;
 }
-Course::Course(float score, string courseName, string courseTeacher, int courseUnit) {
+Course::Course(string courseName, int courseUnit,string courseTeacher, float score) {
 	this->courseName = courseName;
 	this->courseTeacher = courseTeacher;
 	setScore(score);
@@ -12,6 +12,12 @@ Course::Course(float score, string courseName, string courseTeacher, int courseU
 }
 
 //set
+//void Course::setAll(string courseName, int courseUnit,string courseTeacher = NULL,float score = 0) {
+//	this->courseName = courseName;
+//	this->courseTeacher = courseTeacher;
+//	setScore(score);
+//	setUnit(courseUnit);
+//}
 void Course::setCourseName(string name) {
 	courseName = name;
 }
@@ -29,7 +35,7 @@ void Course::setScore(float score) {
 }
 void Course::setUnit(int unit) {
 	if (unit > 5) {
-		unit = 4;
+		unit = 5;
 	}
 	if (unit < 0) {
 		unit = 1;
@@ -48,4 +54,8 @@ string Course::getCourseName() {
 }
 int Course::getCourseUnit() {
 	return courseUnit;
+}
+//other
+void Course::printCourseInfo() {
+	cout << "\tCourse Name : " << courseName << endl << "\tCourse Unit : " << courseUnit << endl;
 }

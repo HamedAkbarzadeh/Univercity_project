@@ -1,4 +1,4 @@
-#include "Course.h"
+﻿#include "Course.h"
 #include "Date.h"
 #include "Person.h"
 #include "Student.h"
@@ -21,8 +21,14 @@ void InsertTerm();
 void InsertCourse();
 void showStudents();
 void showTeachers();
+void searchInUsers();
+void searchByID();
+void searchByName();
 void InsertAdmin();
-
+void showCourse();
+void showTerm();
+void returnAdminMenu();
+void deleteUser();
 //Student Panel
 void StudentPanel();
 //TeacherPanel
@@ -30,9 +36,12 @@ void StudentPanel();
 
 /////global/////
 static int userCounter = 1;
+static int courseCounter = -1;
+static int termCounter = -1;
 	//Person
 	Person** person = new Person * [100];
-
+	Course* course = new Course[100];
+	Term* term = new Term[100];
 	/* info For User 
 	person[0] == currentUserLogin
 	person[1] == defualtAdmin
@@ -209,7 +218,16 @@ void AdminPanel() {
 	system("CLS");
 	int chooseNum;
 	cout << "*** Welcome " << person[0]->getFname() << " " << person[0]->getLname() << " To Admin Panel ***" << endl << endl;
-	cout << "1-Insert New Admin" << endl << "2-Show Teachers" << endl << "3-Show Students" << endl << "4-Insert Course" << endl << "5-Insert Term" << endl << "0-logout" << endl;
+	cout << "1-Insert New Admin" 
+		<< endl << "2-Show Teachers" 
+		<< endl << "3-Show Students" 
+		<< endl << "4-Insert Course" 
+		<< endl << "5-Insert Term" 
+		<< endl << "6-Show Courses" 
+		<< endl << "7-Show Term" 
+		<< endl << "8-Search In Users" 
+		<< endl << "9-Delete User" 
+		<< endl << "0-logout" << endl;
 	cin >> chooseNum;
 	switch (chooseNum)
 	{
@@ -228,11 +246,23 @@ void AdminPanel() {
 	case 5:
 		InsertTerm();
 		break;
+	case 6:
+		showCourse();
+		break;
+	case 7:
+		showTerm();
+		break;
+	case 8:
+		searchInUsers();
+		break;
+	case 9:
+		deleteUser();
+		break;
 	case 0:
 		logout();
 	
 	default:
-		cout << "Please Enter Number Between(1-5)" << endl;
+		returnAdminMenu();
 		break;
 	}
 
@@ -247,13 +277,13 @@ void InsertAdmin() {
 	cin >> fname;
 	cout << endl << "Last Name : ";
 	cin >> lname;
-	cout << endl << "Date of Birthday( example : 1382/27/09 ) ";
+	cout << endl << "Date of Birthday( example : 1382/27/09 ) : ";
 	cin >> dateOfBirth;
 	cout << endl << "Mobile : ";
 	cin >> mobile;
-	cout << endl << "Email : (Must be used inside email @) : ";
+	cout << endl << "Email  (Must be used inside email @) : ";
 	cin >> username;
-	cout << endl << "Rule : ";
+	cout << endl << "Rule ( Choose Between : [ owner , admin , moderator , writer ] ) : ";
 	cin >> rule;
 
 	while (statusPass) {
@@ -270,19 +300,160 @@ void InsertAdmin() {
 	system("CLS");
 	cout << "*** Personl Info New Admin ***" << endl << endl;
 	person[userCounter]->printPersonalInfo();
+	returnAdminMenu();
+}
+void showTeachers() {
+	system("CLS");
+	cout << endl << "*** Show All Teachers ***" << endl << endl;
+	for (int i = 1; i <= userCounter; i++)
+	{
+		if (person[i] != NULL) {
+		if (person[i]->getType() == 1) {
+			person[i]->printPersonalInfo();
+		}
+		}
+	}
+	returnAdminMenu();
+}
+void showStudents() {
+	system("CLS");
+	cout << endl << "*** Show All Students ***" << endl << endl;
+	for (int i = 1; i <= userCounter; i++)
+	{
+		if (person[i] != NULL) {
+		if (person[i]->getType() == 0) {
+			person[i]->printPersonalInfo();
+		}
+		}
+	}
+	returnAdminMenu();
+}
+void InsertCourse() {
+	system("CLS");
+	string courseName;
+	int courseUnit;
+	cout << "*** Insert Course ***" << endl << endl;
+	cout << "1-Course Name : ";
+	cin >> courseName;
+	cout << endl << "2-Course Unit ( Between 0-5 ): ";
+	cin >> courseUnit;
+	course[++courseCounter].setCourseName(courseName);
+	course[courseCounter].setUnit(courseUnit);
+	returnAdminMenu();
+}
+void InsertTerm() {
+	system("CLS");
+	string termName;
+	int courseNumber;
+	cout << "*** Insert Course ***" << endl << endl;
+	cout << "1-Term Name : ";
+	cin >> termName;
+	cout << endl << "2-Number of lessons per semester ( Between 0-♾️ ): ";
+	cin >> courseNumber;
+	term[++termCounter].setCourseNumber(courseNumber);
+	term[termCounter].setTermName(termName);
+	returnAdminMenu();
+}
+void showTerm() {
+	cout << "*** Show Terms ***" << endl << endl;
+	for (int i = 0; i <= termCounter; i++)
+	{
+		term[i].printTermInfo();
+		cout << endl << endl;
+	}
+	returnAdminMenu();
+}
+void showCourse() {
+	cout << "*** Show Courses ***" << endl << endl;
+	for (int i = 0; i <= courseCounter; i++)
+	{
+		course[i].printCourseInfo();
+		cout << endl << endl;
+	}
+	returnAdminMenu();
+}
+void searchInUsers() {
+	system("CLS");
+	int chooseNum;
+	cout << "*** Search Menu ***" << endl;
+	cout << "1-Search By ID : " << endl << "2-Search By Name : " << endl;
+	cin >> chooseNum;
+	switch (chooseNum)
+	{
+	case 1:
+		searchByID();
+		break;
+	case 2:
+		searchByName();
+		break;
+	default:
+		cout << "Please Enter Number Between (1-2) ...";
+		_getch();
+		searchInUsers();
+		break;
+	}
+}
+void searchByID() {
+	system("CLS");
+	int id;
+	cout << "*** Search By ID Panel ***" << endl;
+	cout << "Enter ID : " << endl;
+	cin >> id;
+
+	for (int i = 1; i <= userCounter; i++)
+	{
+		if (person[i] != NULL) {
+		if (person[i]->getID() == id) {
+			cout << endl;
+			person[i]->printPersonalInfo();
+		}
+		}
+	}
+	returnAdminMenu();
+}
+void searchByName() {
+	system("CLS");
+	string name;
+	cout << "*** Search By Name Panel ***" << endl;
+	cout << "Enter Name (Just Name, dont enter name + last name !!) : " << endl;
+	cin >> name;
+
+	for (int i = 1; i <= userCounter; i++)
+	{
+		if (person[i] != NULL) {
+		if (person[i]->getFname().find(name) == string::npos) {
+			cout << endl;
+			person[i]->printPersonalInfo();
+			cout << endl;
+		}
+		}
+	}
+	returnAdminMenu();
+	
+}
+void returnAdminMenu() {
 	cout << endl << endl << "Press Any key ...";
 	_getch();
 	AdminPanel();
 }
-void showTeachers() {
-
-}
-void showStudents() {
-
-}
-void InsertCourse() {
-
-}
-void InsertTerm() {
-
+void deleteUser() {
+	system("CLS");
+	cout << "*** Delete User Panel ***" << endl << endl;
+	int id;
+	for (int i = 1; i <= userCounter; i++)
+	{
+		if (person[i] != NULL) {
+			person[i]->printPersonalInfo();
+		}
+	}
+	cout << "Enter User ID For Delete : ";
+	cin >> id;
+	for (int i = 1; i <= userCounter; i++) {
+		if (person[i] != NULL) {
+			if (person[i]->getID() == id) {
+				person[i] = NULL;
+			}
+		}
+	}
+	returnAdminMenu();
 }

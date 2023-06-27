@@ -13,6 +13,9 @@ public:
 	virtual void printPersonalInfo();
 	virtual void setType();
 	Student& operator = (Student c);
+
+	//get
+	int getStudentNumber() { return studentNumber; }
 private:
 	static int StudentNumbercounter;
 	int studentNumber;

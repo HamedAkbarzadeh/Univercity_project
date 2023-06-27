@@ -8,8 +8,14 @@ class Term
 public:
 	Term();
 	Term(string , int);
+
+	//set
+	//void setAll(string termName, int courseNumber);
 	void setTermName(string termName);
 	void setCourseNumber(int courseNumber);
+
+	//other
+	void printTermInfo();
 
 	Course course;
 private:
