@@ -25,14 +25,14 @@ Student::Student(string fname, string lname, string username, string password, s
 }
 void Student::printPersonalInfo() {
 	int passLen = size(password);
-	cout << endl << "\tID : " << id
-		<< endl << "\tFirst Name : " << fname 
-		<< endl << "\tLast Name : " << lname
-		<< endl << "\tmobile : " << mobile
-		<< endl << "\tStudent Number : " << getStudentNumber()
-		<< endl << "\tDate Of Birth : " << date.getFullDate() 
-		<< endl << "\tDate Of Enter To Univercity : " << dateOfEnter.getFullDate()
-		<< endl << "\tEmail : " << username << endl << "\tpassword : ";
+	cout << endl << "|*  ID : " << id
+		<< endl << "|*  First Name : " << fname
+		<< endl << "|*  Last Name : " << lname
+		<< endl << "|*  mobile : " << mobile
+		<< endl << "|*  Student Number : " << getStudentNumber()
+		<< endl << "|*  Date Of Birth : " << date.getFullDate()
+		<< endl << "|*  Date Of Enter To Univercity : " << dateOfEnter.getFullDate()
+		<< endl << "|*  Email : " << username << endl << "\tpassword : ";
 	for (int i = 0; i <= passLen; i++)
 	{
 		cout << "*";

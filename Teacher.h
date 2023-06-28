@@ -13,11 +13,8 @@ public:
 	virtual void printPersonalInfo();
 	virtual void setType();
 	//set
-	void setSalary(float salary);
 	//get
-	float getSalary() { return salary; }
 private:
-	float salary;
 };
 
 

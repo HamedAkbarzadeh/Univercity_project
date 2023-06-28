@@ -12,15 +12,15 @@ public:
 	
 	Admin& operator = (Admin c);
 	//set
+	void setRule(string rule);
 	virtual void setType();
 	virtual void printPersonalInfo();
-	void setRule(string rule);
+	//virtual void EditProfile(string fname, string lname, string mobile, string username, string date);
+
 	
 	//get
 	int getType() { return type; }
-	string getRule() { return rule; }
 private:
-	string rule; //rules = owner-admin-moderator-writer
 
 };
 

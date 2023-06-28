@@ -15,6 +15,9 @@ public:
 	void setCourseTeacherName(string name);
 	void setCourseTeacherID(int id);
 	void setCourseName(string name);
+	void setCourseStuName(string name);
+	void setCourseStuID(int id);
+
 
 	//get
 	string getCourseTeacherName() { return courseTeacherName; }
@@ -23,15 +26,19 @@ public:
 	int getCourseUnit() { return courseUnit; }
 	float getScore() { return score; }
 	int getID() { return id; }
+	int getCourseStuID() { return courseStudentID; }
+	string getCourseStuName() { return courseStudentName; }
 
 	//other
-	void printCourseInfo();
-	void printCourseInfoWithTeacherName();
+	void printCourseInfo(); //course name , course id  , course unit
+	void printCourseInfoWithTeacherName();//course name , course id  , course unit + teacher name
+	void printCourseInfoWithTeacherNameAndStudentName();//course name , course id  , course unit +teacher name + student name
+	void printCourseInfoWithTeacherNameAndStudentNameAndWithScore();//course name , course id  , course unit +teacher name + student name
 private:
 	static int IDCounter;
 	int id;
 	float score;
-	string courseName , courseTeacherName;
-	int courseUnit , courseTeacherID;
+	string courseName , courseTeacherName , courseStudentName;
+	int courseUnit , courseTeacherID , courseStudentID;
 };
 #endif // !Course_H

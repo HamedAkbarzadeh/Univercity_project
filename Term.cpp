@@ -26,7 +26,7 @@ void Term::setTermName(string termName) {
 }
 //other
 void Term::printTermInfo() {
-	cout << "\tID : " << id 
-		<< endl<< "\tTerm Name : " << termName 
-		<< endl << "\tNumber of lessons per semester : " << courseNumber << endl;
+	cout << "|*  ID : " << id 
+		<< endl<< "|*  Term Name : " << termName 
+		<< endl << "|*  Number of lessons per semester : " << courseNumber << endl;
 }

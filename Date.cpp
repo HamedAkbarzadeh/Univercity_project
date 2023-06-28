@@ -3,7 +3,6 @@
 
 //Constructor
 Date::Date() {
-	cout << endl << "**Date**" << endl;
 }
 Date::Date(string strDate) {
 	converStringToInt(strDate);

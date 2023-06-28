@@ -48,17 +48,41 @@ void Course::setUnit(int unit) {
 	}
 	this->courseUnit = unit;
 }
+void Course::setCourseStuName(string name) {
+	this->courseStudentName = name;
+}
+void Course::setCourseStuID(int id) {
+	this->courseStudentID = id;
+
+}
 
 //other
 void Course::printCourseInfo() {
-	cout << "\tID : " << id
-		<< endl << "\tCourse Name : " << courseName
-		<< endl << "\tCourse Unit : " << courseUnit << endl;
+	cout << "|*  ID : " << id
+		<< endl << "|*  Course Name : " << courseName
+		<< endl << "|*  Course Unit : " << courseUnit << endl;
 }
 void Course::printCourseInfoWithTeacherName() {
-	cout << "\tID : " << id
-		<< endl << "\tCourse Name : " << courseName
-		<< endl << "\tCourse Unit : " << courseUnit
-		<< endl << "\tCourse Teacher Name : " << courseTeacherName
+	cout << "|*  ID : " << id
+		<< endl << "|*  Course Name : " << courseName
+		<< endl << "|*  Course Unit : " << courseUnit
+		<< endl << "|*  Course Teacher Name : " << courseTeacherName
+		<< endl;
+}
+void Course::printCourseInfoWithTeacherNameAndStudentName() {
+	cout << "|*  ID : " << id
+		<< endl << "|*  Course Name : " << courseName
+		<< endl << "|*  Course Unit : " << courseUnit
+		<< endl << "|*  Course Teacher Name : " << courseTeacherName
+		<< endl << "|*  Course Student Name : " << courseStudentName
+		<< endl;
+}
+void Course::printCourseInfoWithTeacherNameAndStudentNameAndWithScore() {
+	cout << "|*  ID : " << id
+		<< endl << "|*  Course Name : " << courseName
+		<< endl << "|*  Course Unit : " << courseUnit
+		<< endl << "|*  Course Teacher Name : " << courseTeacherName
+		<< endl << "|*  Course Student Name : " << courseStudentName
+		<< endl << "|*  Course Student Score : " << score
 		<< endl;
 }

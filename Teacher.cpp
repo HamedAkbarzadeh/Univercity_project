@@ -3,26 +3,23 @@
 Teacher::Teacher(string fname, string lname, string username,
 	string password, string mobile, string DateOfBirth, float salary) 
 	:Person(fname,lname,username,password,mobile,DateOfBirth) {
+	salary = 0;
 	setSalary(salary);
 	this->type = 1;
 }
-void Teacher::setSalary(float salary) {
-	if (salary < 0) {
-		salary = 0;
-	}
-}
+
 
 //virtual
 void Teacher::printPersonalInfo() {
 	int passLen = size(password);
-	cout << endl << "\tID : " << id
-		<< endl << "\tFirst Name : " << fname 
-		<< endl << "\tLast Name : " << lname
-		<< endl << "\tMobile : " << mobile
-		<< endl << "\tSalary : " << salary
-		<< endl << "\tDate Of Birth : " << date.getFullDate()
-		<< endl << "\tEmail : " << username 
-		<< endl << "\tPassword : ";
+	cout << endl << "|*  ID : " << id
+		<< endl << "|*  First Name : " << fname
+		<< endl << "|*  Last Name : " << lname
+		<< endl << "|*  Mobile : " << mobile
+		<< endl << "|*  Salary : " << salary
+		<< endl << "|*  Date Of Birth : " << date.getFullDate()
+		<< endl << "|*  Email : " << username
+		<< endl << "|*  Password : ";
 	for (int i = 0; i <= passLen; i++)
 	{
 		cout << "*";
