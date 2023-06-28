@@ -1,8 +1,9 @@
 #include "Term.h"
 
 //constructor
+int Term::IDCounter = 0;
 Term::Term() {
-	cout << endl << "**Term**" << endl;
+	id = IDCounter++;
 }
 
 Term::Term(string termName , int courseNumber) {
@@ -25,5 +26,7 @@ void Term::setTermName(string termName) {
 }
 //other
 void Term::printTermInfo() {
-	cout << "\tTerm Name : " << termName << endl << "\tNumber of lessons per semester : " << courseNumber << endl;
+	cout << "\tID : " << id 
+		<< endl<< "\tTerm Name : " << termName 
+		<< endl << "\tNumber of lessons per semester : " << courseNumber << endl;
 }

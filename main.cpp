@@ -2,6 +2,7 @@
 #include "Date.h"
 #include "Person.h"
 #include "Student.h"
+#include "Teacher.h"
 #include "Term.h"
 #include "Admin.h"
 #include <conio.h>
@@ -32,15 +33,18 @@ void deleteUser();
 //Student Panel
 void StudentPanel();
 //TeacherPanel
-//void TeacherPanel();
-
+void RegisterTeacherForm();
+void TeacherPanel();
+void returnToTeacherPanel();
+void TeacherSelectCourse();
+void TeacherShowStudentForSpecificationClass();
+void ShowTeacherSelectedCourse();
 /////global/////
 static int userCounter = 1;
 static int courseCounter = -1;
 static int termCounter = -1;
 	//Person
 	Person** person = new Person * [100];
-	Course* course = new Course[100];
 	Term* term = new Term[100];
 	/* info For User 
 	person[0] == currentUserLogin
@@ -148,9 +152,154 @@ void logout() {
 	LoginRegisterForm();
 }
 //Teacher
+
 void RegisterTeacherForm() {
 	system("CLS");
+	int statusPass = true;
+	string fname, lname, mobile, username, password, passwordConfirm, yearsOfStart, dateOfBirth;
+	//string fname, string lname,string username,string password,string mobile
+	cout << "Register Form (Student)" << endl << endl;
+	cout << endl << "First Name : ";
+	cin >> fname;
+	cout << endl << "Last Name : ";
+	cin >> lname;
+	cout << endl << "Date of Birthday( example : 1382/27/09 ) : ";
+	cin >> dateOfBirth;
+	cout << endl << "Mobile : ";
+	cin >> mobile;
 
+	cout << endl << "email : (Must be used inside email @) : ";
+	cin >> username;
+
+	while (statusPass) {
+		cout << endl << "password : (The minimum length of the password should be 6) : ";
+		cin >> password;
+		cout << endl << "Confirm-Password : ";
+		cin >> passwordConfirm;
+		if (password == passwordConfirm) {
+			break;
+		}
+		cout << endl << "The password must be equal to the Confirm-Password" << endl;
+	}
+	person[++userCounter] = new Teacher(fname, lname, username, password, mobile, dateOfBirth, 0);
+	person[0] = NULL;
+	person[0] = person[userCounter];
+	TeacherPanel();
+}
+void TeacherPanel() {
+	cout << "*** Welcome " << person[0]->getFname() << " " << person[0]->getLname() << " To Teacher Panel ***" << endl << endl;
+	system("CLS");
+	int num;
+	cout << "1-Select Course" << endl << "2-Show My Students" << endl << "3-Show My Course" << endl << "4-Set Score" << endl;
+	cin >> num;
+	switch (num)
+	{
+	case 1:
+		TeacherSelectCourse();
+		break;
+	case 2:
+		TeacherShowStudentForSpecificationClass();
+		break;
+	case 3:
+		ShowTeacherSelectedCourse();
+		break;
+	case 4:
+
+		break;
+	default:
+		cout << endl << "Please Enter Number Between (1-3) ..." << endl;
+		returnToTeacherPanel();
+		break;
+	}
+}
+void TeacherSelectCourse() {
+	//select Term
+	system("CLS");
+	int termID;
+	cout << "*** Select Course Panel ***" << endl << endl;
+
+	cout << "For Wich One Term Do You Want Select Course ( Enter Term ID ) : " << endl << endl;
+	for (int i = 0; i <= termCounter; i++)
+	{
+		term[i].printTermInfo();
+		cout << endl << endl;
+	}
+	cin >> termID;
+
+	//select Course
+	system("CLS");
+	int courseID;
+	cout << "Select Course ( Course ID ) :" << endl << endl;
+	for (int i = 0; i <= termCounter; i++)
+	{
+		if (term[i].getID() == termID) {
+			for (int j = 0; j < term[i].getCourseCount(); j++)
+			{
+				if (term[i].course[j].getCourseTeacherID() == -1) {
+					term[i].course[j].printCourseInfo();
+					cout << endl << endl;
+				}
+			}
+		}
+	}
+	cin >> courseID;
+
+	//set Course For Teacher
+	for (int i = 0; i <= termCounter; i++)
+	{
+		if (term[i].getID() == termID) {
+			for (int j = 0; j < term[i].getCourseCount(); j++)
+			{
+				if (term[i].course[j].getID() == courseID) {
+					term[i].course[j].setCourseTeacherName(person[0]->getFname());
+					term[i].course[j].setCourseTeacherID(person[0]->getID());
+				}
+			}
+		}
+	}
+
+	returnToTeacherPanel();
+}
+void TeacherShowStudentForSpecificationClass() {
+	returnToTeacherPanel();
+
+}
+void ShowTeacherSelectedCourse() {
+
+	//select Course
+	system("CLS");
+	cout << "*** Teacher Selected Course Panel ***" << endl << endl;
+	int termID;
+
+	cout << "For Wich One Term ( Enter Term ID ) : " << endl << endl << endl;
+	for (int i = 0; i <= termCounter; i++)
+	{
+		term[i].printTermInfo();
+		cout << endl << endl;
+	}
+	cin >> termID;
+
+	//Show Selected Course From Teacher
+	system("CLS");
+	cout << "Selected Course From :" << person[0]->getFname() << " " << person[0]->getLname() << endl << endl;
+	for (int i = 0; i <= termCounter; i++)
+	{
+		if (term[i].getID() == termID) {
+			for (int j = 0; j < term[i].getCourseCount(); j++)
+			{
+				if (term[i].course[j].getCourseTeacherID() == person[0]->getID()) {
+					term[i].course[j].printCourseInfoWithTeacherName();
+					cout << endl << endl;
+				}
+			}
+		}
+	}
+	returnToTeacherPanel();
+}
+void returnToTeacherPanel() {
+	cout << endl << endl << "Press Any key ...";
+	_getch();
+	TeacherPanel();
 }
 //Student
 void RegisterStudentForm() {
@@ -330,15 +479,40 @@ void showStudents() {
 }
 void InsertCourse() {
 	system("CLS");
+	cout << "*** Insert Course ***" << endl << endl;
+	cout << "For Wich One Term Do You Want Add Course (Enter Term ID) : " << endl;
+	int termID;
+	for (int i = 0; i <= termCounter; i++)
+	{
+		term[i].printTermInfo();
+		cout << endl;
+		cout << endl;
+	}
+	cin >> termID;
+
+	//insert course for termID
 	string courseName;
 	int courseUnit;
-	cout << "*** Insert Course ***" << endl << endl;
-	cout << "1-Course Name : ";
-	cin >> courseName;
-	cout << endl << "2-Course Unit ( Between 0-5 ): ";
-	cin >> courseUnit;
-	course[++courseCounter].setCourseName(courseName);
-	course[courseCounter].setUnit(courseUnit);
+	system("CLS");
+
+	for (int i = 0; i <= termCounter; i++)
+	{
+		if (term[i].getID() == termID) {
+			for (int j = 0; j < term[i].getCourseCount(); j++)
+			{
+				cout << "1-Course Name[ " << j + 1 << " ] : ";
+				cin >> courseName;
+				cout << "2-Course Unit ( Between 0-5 ) [ " << j + 1 << " ] : ";
+				cin >> courseUnit;
+				cout << endl << endl;
+				term[i].course[j].setCourseName(courseName);
+				term[i].course[j].setUnit(courseUnit);
+				term[i].course[j].setScore(-1);
+				term[i].course[j].setCourseTeacherID(-1);
+			}
+		}
+	}
+
 	returnAdminMenu();
 }
 void InsertTerm() {
@@ -364,11 +538,26 @@ void showTerm() {
 	returnAdminMenu();
 }
 void showCourse() {
+	system("CLS");
 	cout << "*** Show Courses ***" << endl << endl;
-	for (int i = 0; i <= courseCounter; i++)
+	cout << "For Wich One Term Do You Want Show Courses (Enter Term ID) : " << endl;
+	int termID;
+	for (int i = 0; i <= termCounter; i++)
 	{
-		course[i].printCourseInfo();
+		term[i].printTermInfo();
 		cout << endl << endl;
+	}
+	cin >> termID;
+	system("CLS");
+	for (int i = 0; i <= termCounter; i++)
+	{
+		if (term[i].getID() == termID) {
+			for (int j = 0; j < term[i].getCourseCount(); j++)
+			{
+				term[i].course[j].printCourseInfo();
+				cout << endl << endl;
+			}
+		}
 	}
 	returnAdminMenu();
 }

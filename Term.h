@@ -14,11 +14,18 @@ public:
 	void setTermName(string termName);
 	void setCourseNumber(int courseNumber);
 
+
+	//
+	int getID() { return id; }
+	int getCourseCount() { return courseNumber; }
+
 	//other
 	void printTermInfo();
 
-	Course course;
+	Course* course = new Course[30];
 private:
+	static int IDCounter;
+	int id;
 	string termName;
 	int courseNumber;
 };
