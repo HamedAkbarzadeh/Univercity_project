@@ -20,7 +20,7 @@ void Teacher::printPersonalInfo() {
 		<< endl << "|*  Date Of Birth : " << date.getFullDate()
 		<< endl << "|*  Email : " << username
 		<< endl << "|*  Password : ";
-	for (int i = 0; i <= passLen; i++)
+	for (int i = 0; i < passLen; i++)
 	{
 		cout << "*";
 	}

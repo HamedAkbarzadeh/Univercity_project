@@ -32,8 +32,9 @@ void Student::printPersonalInfo() {
 		<< endl << "|*  Student Number : " << getStudentNumber()
 		<< endl << "|*  Date Of Birth : " << date.getFullDate()
 		<< endl << "|*  Date Of Enter To Univercity : " << dateOfEnter.getFullDate()
-		<< endl << "|*  Email : " << username << endl << "\tpassword : ";
-	for (int i = 0; i <= passLen; i++)
+		<< endl << "|*  Email : " << username 
+		<< endl << "|*  password : ";
+	for (int i = 0; i < passLen; i++)
 	{
 		cout << "*";
 	}

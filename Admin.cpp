@@ -32,7 +32,7 @@ void Admin::printPersonalInfo() {
 		<< endl << "|*  rule : " << rule 
 		<< endl << "|*  Email : " << username 
 		<< endl << "|*  password : ";
-	for (int i = 0; i <= passLen; i++)
+	for (int i = 0; i < passLen; i++)
 	{
 		cout << "*";
 	}

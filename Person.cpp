@@ -28,7 +28,7 @@ void Person::setUsername(string username) {
 }
 void Person::setMobile(string mobile) {
 	int mobilelen = size(mobile);
-	if (mobile.find("09") == string::npos || mobilelen < 12 || mobilelen >= 12) {
+	if (mobile.find("09") == string::npos || mobilelen != 11) {
 		mobile = "09121112233";
 	}
 	this->mobile = mobile;

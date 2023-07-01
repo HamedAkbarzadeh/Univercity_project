@@ -1056,7 +1056,7 @@ void searchByName() {
 	for (int i = 1; i <= userCounter; i++)
 	{
 		if (person[i] != NULL) {
-			if (person[i]->getFname().find(name) == string::npos) {
+			if (person[i]->getFname().find(name) != string::npos) {
 				cout << endl;
 				person[i]->printPersonalInfo();
 				cout << endl;

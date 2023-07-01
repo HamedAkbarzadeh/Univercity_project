@@ -15,31 +15,18 @@ Date::Date(int year, int mounth, int day) {
 //set
 
 void Date::converStringToInt(string strDate) {
-	int year = 0, mounth = 0, day = 0;
-
-	this->fullDate = strDate;
-	//for (int i = 0; i <= 10; i++)
-	//{
-	//	//year
-	//	if (i >= 0 && i <= 4) {
-	//		year += strDate[i] + (year * 10);
-	//		setYear(year);
-	//	}
-	//	//mounth
-	//	if (i >= 6 && i <= 7) {
-	//		mounth += strDate[i] + (mounth * 10);
-	//		setMounth(mounth);
-	//	}
-	//	//day
-	//	if (i >= 9 && i <= 10) {
-	//		day += strDate[i] + (day * 10);
-	//		setDay(day);
-	//	}
-	//}
+	string y, m, d;
+	y = strDate.substr(0, 4);
+	m = strDate.substr(5, 6);
+	d = strDate.substr(8, 9);
+	setYear(stoi(y));
+	setMounth(stoi(m));
+	setDay(stoi(d));
+	this->fullDate = to_string(getYear()) + " / " + to_string(getMounth()) + " / " + to_string(getDay());
 }
 void Date::setYear(int year) {
-	if (year > 2023 || year < 1910) {
-		year = 2000;
+	if (year > 1402 || year < 1300) {
+		year = 1380;
 	}
 	this->year = year;
 }
