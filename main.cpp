@@ -17,6 +17,7 @@ void RegisterStudentForm();
 int LoginCheck(string, string);
 void logout();
 void ForgotPassword();
+bool CheckUsername(string);
 //Admin Panel
 void AdminPanel();
 void InsertTerm();
@@ -210,6 +211,11 @@ void ForgotPassword() {
 	_getch();
 	LoginRegisterForm();
 }
+bool CheckUsername(string username){
+	for (int i=1; i<=userCounter; i++)
+		if (person[i]->getUsername() == username) return true;
+	return false;
+}
 //Teacher
 void TShowMyProfile() {
 	system("CLS");
@@ -233,9 +239,12 @@ void RegisterTeacherForm() {
 	cout << endl << "Mobile : ";
 	cin >> mobile;
 
-	cout << endl << "email : (Must be used inside email @) : ";
-	cin >> username;
-
+	while (true) {
+		cout << endl << "email : (Must be used inside email @) : ";
+		cin >> username;
+		if (CheckUsername(username) == 0) break;
+		cout << endl << "This Username have been already used!"<< endl;
+	}
 	while (statusPass) {
 		while (true) {
 			cout << endl << endl << "Enter Password (The minimum length of the password should be 6): ";
@@ -444,8 +453,13 @@ void RegisterStudentForm() {
 	cin >> yearsOfStart;
 	cout << endl << "4-Mobile : ";
 	cin >> mobile;
-	cout << endl << "5-email : (Must be used inside email @) : ";
-	cin >> username;
+
+	while (true) {
+		cout << endl << "email : (Must be used inside email @) : ";
+		cin >> username;
+		if (CheckUsername(username) == 0) break;
+		cout << endl << "This Username have been already used!" << endl;
+	}
 
 	while (statusPass) {
 		while (true) {
@@ -660,7 +674,7 @@ void AdminPanel() {
 			<< endl << "9-Delete User ( You Cant Use This :) )"
 			<< endl << "0-logout" << endl;
 	}
-	else if (person[0]->getRule() == "moderator") {
+	else if (person[0]->getRule() == "writer") {
 		cout << "P-Show My Profile"
 			<< endl << "S-Set Salary For Teacher"
 			<< endl << "E-Edit Profile"
@@ -675,11 +689,11 @@ void AdminPanel() {
 			<< endl << "9-Delete User ( You Cant Use This :) )"
 			<< endl << "0-logout" << endl;
 	}
-	else if (person[0]->getRule() == "writer") {
+	else if (person[0]->getRule() == "moderator") {
 		cout << "P-Show My Profile"
 			<< endl << "S-Set Salary For Teacher"
 			<< endl << "E-Edit Profile"
-			<< endl << "1-Insert New Admin"
+			<< endl << "1-Insert New Admin ( You Cant Use This :) )" 
 			<< endl << "2-Show Teachers"
 			<< endl << "3-Show Students"
 			<< endl << "4-Insert Course"
@@ -699,31 +713,31 @@ void AdminPanel() {
 		case 'p':
 			AShowMyProfile();
 			break;
-		case 49: //1
+		case '1': //1
 			InsertAdmin();
 			break;
-		case 50: //2
+		case '2': //2
 			showTeachers();
-			break;
-		case 51: //3
+			break;   
+		case '3': //3
 			showStudents();
 			break;
-		case 52: //4
+		case '4': //4
 			InsertCourse();
 			break;
-		case 53: //5
+		case '5': //5
 			InsertTerm();
 			break;
-		case 54: //6
+		case '6': //6
 			showTerm();
 			break;
-		case 55: //7
+		case '7': //7
 			showCourse();
 			break;
-		case 56: //8
+		case '8': //8
 			searchInUsers();
 			break;
-		case 57: //9
+		case '9': //9
 			deleteUser();
 			break;
 		case 's': 
@@ -732,11 +746,13 @@ void AdminPanel() {
 		case 'e': 
 			EditProfile(2);
 			break;
-		case 48: //0
+		case '0': //0
 			logout();
 
 		default:
-			returnAdminMenu();
+			cout << endl << "You can't use this!\nPlease enter another key...";
+			_getch();
+			AdminPanel();
 			break;
 
 		}
@@ -747,25 +763,25 @@ void AdminPanel() {
 		case 'p':
 			AShowMyProfile();
 			break;
-		case 50: //2
+		case '2': //2
 			showTeachers();
 			break;
-		case 51: //3
+		case '3': //3
 			showStudents();
 			break;
-		case 52: //4
+		case '4': //4
 			InsertCourse();
 			break;
-		case 53: //5
+		case '5': //5
 			InsertTerm();
 			break;
-		case 54: //6
+		case '6': //6
 			showTerm();
 			break;
-		case 55: //7
+		case '7': //7
 			showCourse();
 			break;
-		case 56: //8
+		case '8': //8
 			searchInUsers();
 			break;
 		case 's':
@@ -774,11 +790,13 @@ void AdminPanel() {
 		case 'e':
 			EditProfile(2);
 			break;
-		case 48: //0
+		case '0': //0
 			logout();
 
 		default:
-			returnAdminMenu();
+			cout << endl << "You can't use this!\nPlease enter another key...";
+			_getch();
+			AdminPanel();
 			break;
 
 		}
@@ -789,22 +807,22 @@ void AdminPanel() {
 		case 'p':
 			AShowMyProfile();
 			break;
-		case 50: //2
+		case '2': //2
 			showTeachers();
 			break;
-		case 51: //3
+		case '3': //3
 			showStudents();
 			break;
-		case 52: //4
+		case '4': //4
 			InsertCourse();
 			break;
-		case 53: //5
+		case '5': //5
 			InsertTerm();
 			break;
-		case 54: //6
+		case '6': //6
 			showTerm();
 			break;
-		case 55: //7
+		case '7': //7
 			showCourse();
 			break;
 		case 's':
@@ -813,11 +831,13 @@ void AdminPanel() {
 		case 'e':
 			EditProfile(2);
 			break;
-		case 48: //0
+		case '0': //0
 			logout();
 
 		default:
-			returnAdminMenu();
+			cout << endl << "You can't use this!\nPlease enter another key...";
+			_getch();
+			AdminPanel();
 			break;
 
 		}
@@ -828,13 +848,13 @@ void AdminPanel() {
 		case 'p':
 			AShowMyProfile();
 			break;
-		case 50: //2
+		case '2': //2
 			showTeachers();
 			break;
-		case 51: //3
+		case '3': //3
 			showStudents();
 			break;
-		case 55: //7
+		case '7': //7
 			showCourse();
 			break;
 		case 's':
@@ -843,11 +863,13 @@ void AdminPanel() {
 		case 'e':
 			EditProfile(2);
 			break;
-		case 48: //0
+		case '0': //0
 			logout();
 
 		default:
-			returnAdminMenu();
+			cout << endl << "You can't use this!\nPlease enter another key...";
+			_getch();
+			AdminPanel();
 			break;
 
 		}
