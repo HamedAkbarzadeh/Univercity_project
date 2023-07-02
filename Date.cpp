@@ -16,6 +16,10 @@ Date::Date(int year, int mounth, int day) {
 
 void Date::converStringToInt(string strDate) {
 	string y, m, d;
+	int dateSize = size(strDate);
+	if (dateSize <= 9 || dateSize >= 11) {
+		strDate = "1350/01/01";
+	}
 	y = strDate.substr(0, 4);
 	m = strDate.substr(5, 6);
 	d = strDate.substr(8, 9);

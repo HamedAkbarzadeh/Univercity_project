@@ -15,6 +15,7 @@ public:
 	void setRule(string rule);
 	virtual void setType();
 	virtual void printPersonalInfo();
+	void getSoftDeletedUsers();
 	//virtual void EditProfile(string fname, string lname, string mobile, string username, string date);
 
 	

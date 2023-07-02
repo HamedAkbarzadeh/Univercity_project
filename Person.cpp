@@ -42,6 +42,15 @@ void Person::setSalary(float salary) {
 	}
 	this->salary = salary;
 }
+void Person::setSoftDeleted(int softDeleted) {
+	if (softDeleted >= 1) {
+		this->softDeleted = 1;
+	}
+	else {
+		this->softDeleted = 0;
+	}
+}
+
 //virtual
 void Person::EditProfile(string fname, string lname, string mobile, string username, string date) {
 	this->fname = fname;

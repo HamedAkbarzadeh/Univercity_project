@@ -13,7 +13,7 @@ public:
 	virtual void printPersonalInfo();
 	virtual void setType();
 	Student& operator = (Student c);
-
+	void getSoftDeletedUsers();
 	//get
 	int getStudentNumber() { return studentNumber; }
 private:

@@ -12,6 +12,7 @@ public:
 	//virtual
 	virtual void printPersonalInfo();
 	virtual void setType();
+	void getSoftDeletedUsers();
 	//set
 	//get
 private:

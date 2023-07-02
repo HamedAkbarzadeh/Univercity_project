@@ -32,8 +32,10 @@ void showCourse();
 void showTerm();
 void returnAdminMenu();
 void deleteUser();
+void forceDeleteUser();
 void AShowMyProfile();
 void setSalary();
+void showSoftDeletedUsers();
 //Student Panel
 void StudentPanel();
 void StuSelectCourse();
@@ -170,7 +172,7 @@ void ForgotPassword() {
 	system("CLS");
 	cout << "*** Recovery Password Panel ***" << endl << endl;
 	string mobile, username, pass, confPass;
-	int k = 0 , passSize;
+	int k = 0, passSize;
 	cout << "Enter Email : ";
 	cin >> username;
 	cout << endl << "Enter Mobile : ";
@@ -179,7 +181,7 @@ void ForgotPassword() {
 	{
 		if (person[i]->getUsername() == username && person[i]->getMobile() == mobile) {
 			k++;
-			while(true)
+			while (true)
 			{
 				while (true) {
 					cout << endl << endl << "Enter New Password (The minimum length of the password should be 6): ";
@@ -190,18 +192,18 @@ void ForgotPassword() {
 					}
 					cout << endl << "!!! The minimum length of the password should be 6 !!!" << endl;
 				}
-			cout << endl << "Enter Confirm Password : ";
-			cin >> confPass;
-			if (pass == confPass) {
-				person[i]->setPassword(pass);
-				break;
-			}
-			cout << endl << "The password must be equal to the Confirm-Password" << endl;
+				cout << endl << "Enter Confirm Password : ";
+				cin >> confPass;
+				if (pass == confPass) {
+					person[i]->setPassword(pass);
+					break;
+				}
+				cout << endl << "The password must be equal to the Confirm-Password" << endl;
 			}
 		}
 	}
 	if (k > 0) {
-	cout << endl << "password Successfully Changed :)" << endl;
+		cout << endl << "password Successfully Changed :)" << endl;
 
 	}
 	else {
@@ -211,8 +213,8 @@ void ForgotPassword() {
 	_getch();
 	LoginRegisterForm();
 }
-bool CheckUsername(string username){
-	for (int i=1; i<=userCounter; i++)
+bool CheckUsername(string username) {
+	for (int i = 1; i <= userCounter; i++)
 		if (person[i]->getUsername() == username) return true;
 	return false;
 }
@@ -243,7 +245,7 @@ void RegisterTeacherForm() {
 		cout << endl << "email : (Must be used inside email @) : ";
 		cin >> username;
 		if (CheckUsername(username) == 0) break;
-		cout << endl << "This Username have been already used!"<< endl;
+		cout << endl << "This Username have been already used!" << endl;
 	}
 	while (statusPass) {
 		while (true) {
@@ -637,12 +639,12 @@ void AdminPanel() {
 	system("CLS");
 	int chooseNum;
 	cout << "*** Welcome " << person[0]->getFname() << " " << person[0]->getLname() << " To Admin Panel ***" << endl << endl;
-	cout << "*__________________________________ **** Information About Rule **** ___________________________________*" << endl;
-	cout << "|\t** owner ** = Full Access \t\t\t\t\t\t\t\t\t|"
-		<< endl << "|\t** admin ** = Full Access except (Insert Admin , Delete User) \t\t\t\t\t|"
-		<< endl << "|\t** moderator ** = Full Access except (Insert Admin , Delete User , Search In Users) \t\t|"
-		<< endl << "|\t** writer ** = Just Can Use (Show teacher , Show student , Show Course) \t\t\t|" << endl;
-	cout << "*-------------------------------------------------------------------------------------------------------*" << endl << endl;
+	cout << "*__________________________________________ **** Information About Rule **** __________________________________________*" << endl;
+	cout << "|\t** owner ** = Full Access \t\t\t\t\t\t\t\t\t\t\t\t\t|"
+		<< endl << "|\t** admin ** = Full Access except (Insert Admin , Force Delete User) \t\t\t\t\t\t\t|"
+		<< endl << "|\t** moderator ** = Full Access except (Insert Admin , Force & Soft Delete User + See Them, Search In Users) \t\t|"
+		<< endl << "|\t** writer ** = Just Can Use (Show teacher , Show student , Show Course) \t\t\t\t\t\t\t|" << endl;
+	cout << "*----------------------------------------------------------------------------------------------------------------------*" << endl << endl;
 
 	if (person[0]->getRule() == "owner") {
 		cout << "P-Show My Profile"
@@ -656,7 +658,9 @@ void AdminPanel() {
 			<< endl << "6-Show Courses"
 			<< endl << "7-Show Term"
 			<< endl << "8-Search In Users"
-			<< endl << "9-Delete User"
+			<< endl << "9-Soft Delete User"
+			<< endl << "F-Force Deleted User"
+			<< endl << "D-Show Soft Deleted Users"
 			<< endl << "0-logout" << endl;
 	}
 	else if (person[0]->getRule() == "admin") {
@@ -671,7 +675,9 @@ void AdminPanel() {
 			<< endl << "6-Show Courses"
 			<< endl << "7-Show Term"
 			<< endl << "8-Search In Users"
-			<< endl << "9-Delete User ( You Cant Use This :) )"
+			<< endl << "9-Soft Delete User"
+			<< endl << "F-Force Deleted User ( You Cant Use This :) )"
+			<< endl << "D-Show Soft Deleted Users"
 			<< endl << "0-logout" << endl;
 	}
 	else if (person[0]->getRule() == "writer") {
@@ -686,14 +692,16 @@ void AdminPanel() {
 			<< endl << "6-Show Courses"
 			<< endl << "7-Show Term ( You Cant Use This :) )"
 			<< endl << "8-Search In Users ( You Cant Use This :) )"
-			<< endl << "9-Delete User ( You Cant Use This :) )"
+			<< endl << "9-Soft Delete User ( You Cant Use This :) )"
+			<< endl << "F-Force Deleted User ( You Cant Use This :) )"
+			<< endl << "D-Show Soft Deleted Users ( You Cant Use This :) )"
 			<< endl << "0-logout" << endl;
 	}
 	else if (person[0]->getRule() == "moderator") {
 		cout << "P-Show My Profile"
 			<< endl << "S-Set Salary For Teacher"
 			<< endl << "E-Edit Profile"
-			<< endl << "1-Insert New Admin ( You Cant Use This :) )" 
+			<< endl << "1-Insert New Admin ( You Cant Use This :) )"
 			<< endl << "2-Show Teachers"
 			<< endl << "3-Show Students"
 			<< endl << "4-Insert Course"
@@ -701,7 +709,9 @@ void AdminPanel() {
 			<< endl << "6-Show Courses"
 			<< endl << "7-Show Term"
 			<< endl << "8-Search In Users ( You Cant Use This :) )"
-			<< endl << "9-Delete User ( You Cant Use This :) )"
+			<< endl << "9-Soft Delete User ( You Cant Use This :) )"
+			<< endl << "F-Force Deleted User ( You Cant Use This :) )"
+			<< endl << "D-Show Soft Deleted Users ( You Cant Use This :) )"
 			<< endl << "0-logout" << endl;
 	}
 	chooseNum = _getch();
@@ -718,7 +728,7 @@ void AdminPanel() {
 			break;
 		case '2': //2
 			showTeachers();
-			break;   
+			break;
 		case '3': //3
 			showStudents();
 			break;
@@ -729,10 +739,10 @@ void AdminPanel() {
 			InsertTerm();
 			break;
 		case '6': //6
-			showTerm();
+			showCourse();
 			break;
 		case '7': //7
-			showCourse();
+			showTerm();
 			break;
 		case '8': //8
 			searchInUsers();
@@ -740,11 +750,17 @@ void AdminPanel() {
 		case '9': //9
 			deleteUser();
 			break;
-		case 's': 
+		case 'f':
+			forceDeleteUser();
+			break;
+		case 's':
 			setSalary();
 			break;
-		case 'e': 
+		case 'e':
 			EditProfile(2);
+			break;
+		case 'd': 
+			showSoftDeletedUsers();
 			break;
 		case '0': //0
 			logout();
@@ -776,19 +792,25 @@ void AdminPanel() {
 			InsertTerm();
 			break;
 		case '6': //6
-			showTerm();
+			showCourse();
 			break;
 		case '7': //7
-			showCourse();
+			showTerm();
 			break;
 		case '8': //8
 			searchInUsers();
+			break;
+		case '9': //9
+			deleteUser();
 			break;
 		case 's':
 			setSalary();
 			break;
 		case 'e':
 			EditProfile(2);
+			break;
+		case 'd':
+			showSoftDeletedUsers();
 			break;
 		case '0': //0
 			logout();
@@ -820,10 +842,10 @@ void AdminPanel() {
 			InsertTerm();
 			break;
 		case '6': //6
-			showTerm();
+			showCourse();
 			break;
 		case '7': //7
-			showCourse();
+			showTerm();
 			break;
 		case 's':
 			setSalary();
@@ -855,7 +877,7 @@ void AdminPanel() {
 			showStudents();
 			break;
 		case '7': //7
-			showCourse();
+			showTerm();
 			break;
 		case 's':
 			setSalary();
@@ -997,6 +1019,7 @@ void InsertTerm() {
 	returnAdminMenu();
 }
 void showTerm() {
+	system("CLS");
 	cout << "*** Show Terms ***" << endl << endl;
 	for (int i = 0; i <= termCounter; i++)
 	{
@@ -1095,23 +1118,68 @@ void returnAdminMenu() {
 }
 void deleteUser() {
 	system("CLS");
-	cout << "*** Delete User Panel ***" << endl << endl;
-	int id;
-	for (int i = 1; i <= userCounter; i++)
+	cout << "*** Soft Delete User Panel ***" << endl << endl;
+	int id, existUser = 0;
+	for (int i = 2; i <= userCounter; i++)
 	{
-		if (person[i] != NULL) {
+		if (person[i]->getSoftDeleted() == 0) {
 			person[i]->printPersonalInfo();
+			existUser++;
 		}
 	}
+	if (existUser == 0) returnAdminMenu();
+	int exist = 0;
 	cout << "Enter User ID For Delete : ";
 	cin >> id;
-	for (int i = 1; i <= userCounter; i++) {
-		if (person[i] != NULL) {
+	for (int i = 2; i <= userCounter; i++) {
+		if (person[i]->getSoftDeleted() == 0) {
 			if (person[i]->getID() == id) {
-				person[i] = NULL;
+				person[i]->setSoftDeleted(1);
+				exist++;
 			}
 		}
 	}
+	if (exist == 0) {
+		cout << endl << endl << "This user not exist !!" << endl << "Press any key...";
+		_getch();
+		deleteUser();
+	}
+	cout << endl << endl << "successfully Deleted User :)" << endl;
+	returnAdminMenu();
+}
+void forceDeleteUser() {
+	system("CLS");
+	cout << "*** Force Delete User Panel ***" << endl << endl;
+	int id, existUser = 0;
+	for (int i = 2; i <= userCounter; i++)
+	{
+		if (person[i]->getSoftDeleted() == 1) {
+			person[i]->getSoftDeletedUsers();
+			existUser++;
+		}
+	}
+	if (existUser == 0) returnAdminMenu();
+	int exist = 0;
+	cout << "Enter User ID For Force Delete : ";
+	cin >> id;
+	for (int i = 2; i <= userCounter; i++) {
+		if (person[i]->getSoftDeleted() == 1) {
+			if (person[i]->getID() == id) {
+				delete person[i];
+				for (int j = i + 1; j <= userCounter; j++) {
+					person[j - 1] = person[j];
+				}
+				--userCounter;
+				exist++;
+			}
+		}
+	}
+	if (exist == 0) {
+		cout << endl << endl << "This user don't soft deleted !!" << endl << "Press any key...";
+		_getch();
+		forceDeleteUser();
+	}
+	cout << endl << endl << "successfully Deleted User :)" << endl;
 	returnAdminMenu();
 }
 void setSalary() {
@@ -1176,4 +1244,17 @@ void EditProfile(int type) {
 		LoginRegisterForm();
 		break;
 	}
+}
+void showSoftDeletedUsers() {
+	system("CLS");
+	cout << "*** Show Soft Delete User Panel ***" << endl << endl;
+
+	for (int i = 2; i <= userCounter; i++)
+	{
+		if (person[i]->getSoftDeleted() == 1) {
+			person[i]->getSoftDeletedUsers();
+		}
+	}
+
+	returnAdminMenu();
 }
